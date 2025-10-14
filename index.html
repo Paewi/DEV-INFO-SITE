@@ -4,49 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dev&Info - Accueil</title>
+    <meta name="description" content="Dev&Info — dépannage, formations et équipements reconditionnés. Assistance à domicile et formations pour tous niveaux.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="images/word-logo.svg">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">Dev&Info</div>
-        <div class="nav-links">
-            <a href="index.html" class="active">Accueil</a>
+    <a class="skip-link" href="#main">Passer au contenu</a>
+    <header class="navbar">
+        <div class="logo"><a class="nav-title-logo" href="index.html">Dev&Info</a></div>
+        <nav class="nav-links">
+            <a href="index.html" class="active" aria-current="page">Accueil</a>
+            <a href="prestations.html">Prestations</a>
             <a href="formations.html">Formations</a>
             <a href="boutique.html">Boutique</a>
-            <a href="contact.html">Contact</a>
-            <a href="mentions-legales.html">Mentions Légales</a>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
-    <section class="hero">
-        <h1>Bienvenue chez Dev&Info</h1>
-        <p>Votre partenaire en solutions informatiques : expertise technique, formations et équipements reconditionnés.</p>
-        <a href="contact.html" class="cta-button">Nous contacter</a>
-    </section>
+    <main id="main">
+        <section class="hero">
+            <h1>Bienvenue chez Dev&Info</h1>
+            <p>Votre partenaire en solutions informatiques : expertise technique, formations et équipements reconditionnés.</p>
+            <a href="contact.html" class="cta-button">Nous contacter</a>
+        </section>
 
-    <section class="section">
-        <h2>Nos Services</h2>
-        <div class="card-container">
-            <div class="card">
-                <h3>Services Techniques</h3>
-                <p>Réparation, maintenance et optimisation de vos systèmes informatiques.</p>
+        <section class="section">
+            <h2 class="title2-page-hero">Nos Services</h2>
+            <div class="card-container">
+                <div class="card">
+                    <h3>Prestations</h3>
+                    <p>Un problème informatique ? Découvrez nos services à domicile.</p>
+                    <a href="prestations.html" class="card-link">Plus d'infos</a>
+                </div>
+                <div class="card">
+                    <h3>Formations</h3>
+                    <p>Formations adaptées pour débutants et avancés.</p>
+                    <a href="formations.html" class="card-link">En savoir plus</a>
+                </div>
+                <div class="card">
+                    <h3>Reconditionnement</h3>
+                    <p>Ordinateurs et équipements reconditionnés.</p>
+                    <a href="boutique.html" class="card-link">Voir la boutique</a>
+                </div>
             </div>
-            <div class="card">
-                <h3>Formations</h3>
-                <p>Formations adaptées pour débutants et avancés.</p>
-                <a href="formations.html" class="card-link">En savoir plus</a>
-            </div>
-            <div class="card">
-                <h3>Reconditionnement</h3>
-                <p>Ordinateurs et équipements reconditionnés.</p>
-                <a href="boutique.html" class="card-link">Voir la boutique</a>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer>
-        <p>© 2025 Dev&Info. Tous droits réservés.</p>
+        <p>© 2025 Dev&Info. Tous droits réservés.<br>
+        <a class="contact" href="contact.html">Contact</a> - <a class="mentions-legales" href="mentions-legales.html">Mentions Légales</a></p>
     </footer>
 </body>
 </html>

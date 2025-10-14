@@ -18,17 +18,28 @@ body {
     z-index: 100;
 }
 
-.logo {
+/* .logo {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #00ff9f;
     text-shadow: 0 0 10px rgba(0, 255, 159, 0.5);
+} */
+.nav-title-logo {
+    text-decoration: none;
+    color: #00ff9f;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(0, 255, 159, 0.5);
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 }
 
 .nav-links a {
     color: #00ff9f;
     text-decoration: none;
-    margin: 0 1rem;
     font-size: 1.2rem;
     transition: color 0.3s ease;
 }
@@ -40,6 +51,34 @@ body {
 .nav-links a.active {
     color: #ff006e;
     border-bottom: 2px solid #ff006e;
+}
+
+/* Skip link for accessibility */
+.skip-link {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+.skip-link:focus {
+    position: static;
+    left: 0;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    background: #00ff9f;
+    color: #0d1b2a;
+    z-index: 9999;
+    border-radius: 4px;
+}
+
+/* Focus-visible styles for keyboard users */
+a:focus, .cta-button:focus, .card-link:focus, .contact-link:focus {
+    outline: 3px solid #ff006e;
+    outline-offset: 3px;
+    box-shadow: none;
 }
 
 .hero {
@@ -84,22 +123,22 @@ body {
     margin: 0 auto;
 }
 
-.section h2 {
-    font-size: 2rem;
-    color: #00ff9f;
+.title2-page-hero {
+    font-size: 2.2rem;
+    text-shadow: 0 0 6px #00ff9f;
     margin-bottom: 2rem;
     text-align: center;
 }
 
 .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
     gap: 2rem;
 }
 
 .card {
     background: rgba(27, 38, 59, 0.8);
-    padding: 1.5rem;
+    padding: 1rem;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 255, 159, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -111,13 +150,13 @@ body {
 }
 
 .card h3 {
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: #00ff9f;
     margin-bottom: 1rem;
 }
 
 .card p {
-    font-size: 1rem;
+    font-size: 0.8rem;
     margin-bottom: 1rem;
 }
 
@@ -138,11 +177,21 @@ body {
     transform: translateY(-3px);
 }
 
+.km-costs {
+    font-size: 0.7rem;
+    padding-inline-start: 0;
+}
+.km-costs-li {
+    list-style: none;
+    list-style-position: inside;
+    padding: 0;
+}
+
 .img-container-boutique {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 1rem 0;
+    margin: 1rem 0;
 }
 .img-boutique {
     width: 100%;
@@ -155,14 +204,31 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 1rem 0;
+    margin: 1rem 0;
 }
 
 .img-formations {
     width: 30%;
-    height: 50;
     border-radius: 10px;
-    margin: 1.5rem auto;
+}
+
+/* Make formation logos scale nicely on small screens */
+.img-formations {
+    max-width: 100px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.img-container-pictures-works {
+    display: flex;
+    justify-content: center;
+}
+
+.picture-works {
+    width: 58%;
+    height: auto;
+    border-radius: 10px;
 }
 
 .contact-link {
@@ -182,6 +248,12 @@ body {
     transform: translateY(-3px);
 }
 
+.contact, .mentions-legales {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
 footer {
     text-align: center;
     padding: 2rem;
@@ -195,17 +267,58 @@ footer p {
 
 @media (max-width: 768px) {
     .navbar {
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        position: relative;
     }
     .nav-links {
+        display: flex;
+        flex-direction: column;
         margin-top: 1rem;
     }
     .nav-links a {
         display: block;
         margin: 0.5rem 0;
     }
+    .hero {
+        padding: 2rem 1rem;
+    }
     .hero h1 {
-        font-size: 2rem;
+        font-size: 1.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .cta-button {
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+    }
+
+    .title-page, .title2-page-hero {
+        font-size: 1.6rem;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 2rem;
+    }
+
+    .title-page-hero {
+        font-size: 1.8rem;
+        text-align: center;
+        margin-bottom: 2rem;
     }
 }
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+ 
