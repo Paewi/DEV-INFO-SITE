@@ -117,10 +117,36 @@ a:focus, .cta-button:focus, .card-link:focus, .contact-link:focus {
     transform: translateY(-3px);
 }
 
+.fidelite-home {
+    text-align: center;
+    padding: 0.5rem;
+    background-color: #310116;
+    color: #e0e1dd;
+}
+
+.fidelite-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: #ff006e;
+    color: #e0e1dd;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 700;
+    transition: background 0.3s ease, transform 0.3s ease;
+    margin: 1rem 0;
+}
+
+.fidelite-button:hover {
+    background: #00ff9f;
+    color: #0d1b2a;
+    transform: translateY(-3px);
+}
+
 .section {
     padding: 3rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
+    
 }
 
 .title2-page-hero {
