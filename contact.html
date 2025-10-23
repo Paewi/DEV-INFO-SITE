@@ -69,12 +69,20 @@
                 </div>
             </div>
 
-            <!-- Formulaire de contact avec Formspree -->
+            <!-- Formulaire de contact avec Formspree + redirection JS -->
             <div class="contact-form-container">
                 <h2>Ou remplissez ce formulaire</h2>
                 
-                <!-- ⚠️ IMPORTANT: Remplace TON_FORMSPREE_ID par ton vrai ID Formspree -->
-                <form action="https://formspree.io/f/mjkaqdkl" method="POST">
+                <!-- Message de succès (caché par défaut) -->
+                <div id="form-success" style="display: none; padding: 2rem; background: rgba(0, 255, 159, 0.1); border-radius: 10px; border: 2px solid #00ff9f; text-align: center; margin-bottom: 2rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
+                    <h3 style="color: #00ff9f; margin-bottom: 1rem;">Message envoyé avec succès !</h3>
+                    <p style="margin-bottom: 1rem;">Redirection vers la page de confirmation...</p>
+                    <div style="width: 50px; height: 50px; border: 5px solid rgba(0, 255, 159, 0.3); border-top-color: #00ff9f; border-radius: 50%; margin: 0 auto; animation: spin 1s linear infinite;"></div>
+                </div>
+
+                <!-- Formulaire -->
+                <form id="contactForm" action="https://formspree.io/f/mjkaqdkl" method="POST">
                     
                     <div class="form-group">
                         <label for="name">Nom complet <span class="form-required">*</span></label>
@@ -83,7 +91,7 @@
 
                     <div class="form-group">
                         <label for="email">Adresse email <span class="form-required">*</span></label>
-                        <input type="email" id="email" name="_replyto" required placeholder="votre.email@exemple.com">
+                        <input type="email" id="email" name="email" required placeholder="votre.email@exemple.com">
                     </div>
 
                     <div class="form-group">
@@ -108,16 +116,13 @@
                         <textarea id="message" name="message" required placeholder="Décrivez votre besoin ou votre problème..."></textarea>
                     </div>
 
-                    <!-- Champ honeypot anti-spam (invisible pour les humains, piège pour les bots) -->
+                    <!-- Champ honeypot anti-spam -->
                     <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
                     
-                    <!-- Redirection après soumission - CHANGE L'URL PAR TON VRAI SITE -->
-                    <input type="hidden" name="_next" value="https://paewi.github.io/DEV-INFO-SITE/merci.html">
-                    
-                    <!-- Personnalisation de l'objet de l'email que tu recevras -->
+                    <!-- Personnalisation de l'objet de l'email -->
                     <input type="hidden" name="_subject" value="Nouveau message depuis le site Dev&Info">
 
-                    <button type="submit" class="form-submit">Envoyer le message</button>
+                    <button type="submit" class="form-submit" id="submitBtn">Envoyer le message</button>
                     
                     <p style="margin-top: 1rem; font-size: 0.9rem; text-align: center; color: #e0e1dd;">
                         <span class="form-required">*</span> Champs obligatoires
@@ -143,5 +148,61 @@
         <p>© 2025 Dev&Info. Tous droits réservés.<br>
         <a class="contact" href="contact.html">Contact</a> - <a class="mentions-legales" href="mentions-legales.html">Mentions Légales</a></p>
     </footer>
+
+    <!-- Script de redirection après soumission -->
+    <style>
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+
+    <script>
+        const form = document.getElementById('contactForm');
+        const formSuccess = document.getElementById('form-success');
+        const submitBtn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Désactive le bouton pour éviter double soumission
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Envoi en cours...';
+            
+            // Récupère les données du formulaire
+            const formData = new FormData(form);
+            
+            try {
+                // Envoie à Formspree
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    // Succès ! Cache le formulaire et affiche le message
+                    form.style.display = 'none';
+                    formSuccess.style.display = 'block';
+                    
+                    // Redirige vers merci.html après 2 secondes
+                    setTimeout(function() {
+                        window.location.href = 'merci.html';
+                    }, 2000);
+                } else {
+                    // Erreur Formspree
+                    alert('Une erreur est survenue. Veuillez réessayer ou nous contacter par téléphone.');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Envoyer le message';
+                }
+            } catch (error) {
+                // Erreur réseau
+                alert('Erreur de connexion. Veuillez vérifier votre connexion internet et réessayer.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Envoyer le message';
+            }
+        });
+    </script>
 </body>
 </html>
