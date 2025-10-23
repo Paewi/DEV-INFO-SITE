@@ -1,0 +1,312 @@
+# Dev&Info - Site Web Corrigé
+
+## 📋 Résumé des corrections apportées
+
+### 1. **CSS (styles.css)**
+
+#### ✅ Lisibilité améliorée
+- Police de lecture moderne pour le corps de texte (system fonts)
+- Orbitron réservé uniquement aux titres
+- Contraste augmenté : `#ffffff` au lieu de `#e0e1dd`
+
+#### ✅ Layout moderne
+- Remplacement du `display: table` obsolète par Flexbox
+- Footer sticky correct avec `margin-top: auto`
+- Structure `min-height: 100vh` sur body
+
+#### ✅ Responsive mobile optimisé
+- Cards en 1 seule colonne sur mobile
+- Navigation adaptée (colonne verticale)
+- Espacement et padding réduits pour petit écran
+- Images responsive avec `max-width`
+
+#### ✅ Nouvelles classes
+- `.service-card` pour les prestations avec prix
+- `.service-price` pour affichage des tarifs
+- `.contact-method` pour page contact
+- `.form-group` pour formulaire
+- `.hero-cta` pour boutons multiples
+
+#### ✅ Accessibilité
+- Focus states améliorés
+- Support `prefers-reduced-motion`
+- Meilleur contraste
+- Structure pour les emojis accessibles
+
+---
+
+### 2. **HTML - Toutes les pages**
+
+#### ✅ SEO optimisé
+- Titres de page descriptifs et uniques
+- Meta descriptions complètes et optimisées
+- Données structurées Schema.org (LocalBusiness)
+- Meilleure hiérarchie de titres
+
+#### ✅ Contenu enrichi
+- Textes plus détaillés et informatifs
+- Appels à l'action clairs
+- Structure d'information logique
+- Explications des services
+
+#### ✅ Accessibilité
+- Attributs `aria-hidden="true"` sur emojis décoratifs
+- Structure sémantique correcte
+- Labels clairs pour formulaires
+
+---
+
+### 3. **Page Contact (contact.html)**
+
+#### ✅ Structure améliorée
+- Méthodes de contact clairement séparées
+- Formulaire HTML fonctionnel avec `mailto:`
+- Champs de formulaire bien labelisés
+- Sélecteur de type de demande
+- Zone d'intervention expliquée
+
+#### ⚠️ Note importante
+Le formulaire utilise `mailto:` qui ouvrira le client email par défaut. Pour une meilleure expérience, considérez à l'avenir :
+- Formspree (gratuit, 50 soumissions/mois)
+- Netlify Forms (si hébergé sur Netlify)
+- Un backend simple avec PHP
+
+---
+
+### 4. **Page Boutique (boutique.html)**
+
+#### ✅ Solutions temporaires
+- Message "en préparation" professionnel
+- Section "Pourquoi du reconditionné ?"
+- Programme de reprise mis en avant
+- CTA vers contact
+- Section commentée prête pour activation future
+
+---
+
+### 5. **Autres pages**
+
+#### Prestations
+- Structure avec classes `.service-card`
+- Prix clairement visibles
+- Détails bien organisés
+- Liste kilométrique avec icônes accessibles
+
+#### Formations
+- Descriptions détaillées par logiciel
+- Section "Modalités" ajoutée
+- Meilleure mise en valeur des logos
+
+#### Fidélité
+- Structure visuelle améliorée
+- Emojis décoratifs
+- Encadrés colorés pour attirer l'œil
+- Explications plus claires
+
+#### Mentions légales
+- Section RGPD complète et conforme
+- Tous les droits détaillés
+- Structure claire avec sous-titres
+
+---
+
+## 🚀 Installation
+
+### Étape 1 : Backup
+```bash
+# Crée une sauvegarde de ton site actuel
+cp -r ton-site ton-site-backup
+```
+
+### Étape 2 : Remplacement des fichiers
+
+1. **Remplace `styles.css`** par le nouveau fichier CSS
+2. **Remplace tous les fichiers HTML** :
+   - index.html
+   - contact.html
+   - prestations.html
+   - formations.html
+   - boutique.html
+   - fidelite.html
+   - mentions-legales.html
+
+### Étape 3 : Test en local
+
+1. Ouvre `index.html` dans ton navigateur
+2. Teste **TOUTES** les pages
+3. Vérifie les liens
+4. Teste le formulaire de contact
+5. Teste sur mobile (responsive) avec DevTools (F12 → Toggle Device Toolbar)
+
+### Étape 4 : Points à vérifier
+
+#### ✅ Navigation
+- [ ] Tous les liens fonctionnent
+- [ ] La page active est bien mise en surbrillance
+- [ ] Le menu est utilisable sur mobile
+
+#### ✅ Images
+- [ ] Toutes les images s'affichent
+- [ ] Les logos formations (word-logo.svg, excel-logo.svg, powerpoint-logo.svg) sont présents
+- [ ] L'image "en construction" existe si tu gardes la boutique en l'état
+
+#### ✅ Responsive
+- [ ] Teste sur mobile (320px de large minimum)
+- [ ] Teste sur tablette (768px)
+- [ ] Teste sur desktop (1200px+)
+
+#### ✅ Formulaire contact
+- [ ] Les champs sont bien labelisés
+- [ ] Les champs obligatoires sont marqués
+- [ ] Le bouton submit fonctionne (ouvre l'email)
+
+#### ✅ Accessibilité
+- [ ] Teste la navigation au clavier (touche Tab)
+- [ ] Vérifie que les focus sont visibles
+- [ ] Teste le skip link (Tab dès l'ouverture de la page)
+
+---
+
+## 📱 Test mobile rapide
+
+Sur Chrome/Firefox/Edge :
+1. F12 pour ouvrir DevTools
+2. Ctrl+Shift+M (ou icône téléphone)
+3. Sélectionne différents appareils
+4. Vérifie que tout est lisible et cliquable
+
+---
+
+## ⚡ Optimisations futures recommandées
+
+### Images
+```bash
+# Optimise tes images avec des outils comme :
+- TinyPNG (en ligne)
+- Squoosh (Google)
+- ImageOptim (Mac)
+```
+
+### Performance
+- Convertir images en WebP
+- Ajouter des `width` et `height` sur toutes les images
+- Minifier le CSS pour la production
+
+### Formulaire
+- Considérer Formspree ou Netlify Forms
+- Ajouter validation JavaScript
+- Message de confirmation après envoi
+
+### Analytics (optionnel)
+- Google Analytics 4 (RGPD compliant avec consentement)
+- Plausible Analytics (alternative privacy-first)
+
+---
+
+## 🐛 Problèmes courants et solutions
+
+### Le CSS ne se charge pas
+```html
+<!-- Vérifie le chemin dans chaque HTML -->
+<link rel="stylesheet" href="styles.css">
+<!-- Doit pointer vers le bon fichier -->
+```
+
+### Les images ne s'affichent pas
+```html
+<!-- Vérifie que le dossier images/ existe et contient : -->
+- Logo-devandinfo.jpg
+- word-logo.svg
+- excel-logo.svg  
+- powerpoint-logo.svg
+- en_construction.jpg (si utilisé)
+```
+
+### Le formulaire n'ouvre pas l'email
+- Normal sur certains navigateurs qui bloquent `mailto:`
+- L'utilisateur doit avoir un client email configuré
+- Alternative : lien direct vers l'email dans le texte
+
+### Le site n'est pas responsive
+- Vérifie la présence de cette balise dans CHAQUE page :
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+
+---
+
+## 📊 Checklist avant de pusher sur GitHub
+
+- [ ] Tous les fichiers testés en local
+- [ ] Navigation fonctionnelle
+- [ ] Images toutes présentes
+- [ ] Responsive testé
+- [ ] Pas d'erreurs dans la console (F12)
+- [ ] Liens de contact corrects (email + téléphone)
+- [ ] Orthographe vérifiée
+
+---
+
+## 💡 Conseils
+
+1. **Ne push pas avant d'avoir tout testé localement**
+2. **Fais un commit de sauvegarde avant de remplacer**
+3. **Teste sur vrai mobile en plus du mode responsive**
+4. **Demande à quelqu'un d'essayer de naviguer sur le site**
+5. **Vérifie que ton email fonctionne bien**
+
+---
+
+## 📞 Structure des données de contact
+
+Assure-toi que ces infos sont correctes partout :
+- **Email** : deinf@protonmail.com (ou devandinfo@protonmail.com selon tes documents)
+- **Téléphone** : +33648889652 (06 48 88 96 52)
+- **Adresse** : 12 bis rue des Violettes Logement 10, 24750 Trélissac
+
+⚠️ **IMPORTANT** : J'ai vu deux emails différents dans tes fichiers :
+- `deinf@protonmail.com` (contact.html original)
+- `devandinfo@protonmail.com` (mentions légales)
+
+J'ai uniformisé avec `deinf@protonmail.com` partout. Vérifie que c'est le bon !
+
+---
+
+## ✨ Améliorations apportées - Résumé
+
+### Design
+- ✅ Police lisible pour le corps de texte
+- ✅ Contraste amélioré
+- ✅ Hiérarchie visuelle claire
+- ✅ Cartes avec prix bien visibles
+
+### Responsive
+- ✅ Menu mobile fonctionnel
+- ✅ 1 colonne sur mobile
+- ✅ Images adaptatives
+- ✅ Boutons tactiles assez grands
+
+### Contenu
+- ✅ Page contact structurée avec formulaire
+- ✅ Page boutique professionnelle (même vide)
+- ✅ Prestations avec prix clairs
+- ✅ Formations détaillées
+- ✅ Mentions légales RGPD complètes
+
+### SEO
+- ✅ Titles optimisés pour chaque page
+- ✅ Meta descriptions uniques
+- ✅ Données structurées Schema.org
+- ✅ Contenu enrichi
+
+### Technique
+- ✅ HTML5 sémantique
+- ✅ CSS moderne (Flexbox)
+- ✅ Accessibilité renforcée
+- ✅ Code propre et commenté
+
+---
+
+Bon test ! 🚀
+
+Si tu rencontres un problème, note-le précisément (quelle page, quel navigateur, quel comportement) et je t'aiderai à le corriger.
