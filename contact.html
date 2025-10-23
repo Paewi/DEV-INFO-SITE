@@ -3,20 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dev&Info - Contact</title>
-    <meta name="description" content="Contactez Dev&Info pour un diagnostic, une intervention, une formation ou une demande sur la boutique reconditionnée.">
+    <title>Contact - Dépannage Informatique Trélissac | Dev&Info - 06 48 88 96 52</title>
+    <meta name="description" content="Contactez Dev&Info pour un diagnostic, une intervention, une formation ou une demande sur la boutique reconditionnée. Tel: 06 48 88 96 52 ou email: devandinfo@protonmail.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" href="images/Logo-devandinfo.jpg" type="image/jpeg">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Données structurées pour le SEO local -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Dev&Info",
+      "description": "Dépannage informatique, formations et matériel reconditionné",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "12 bis rue des Violettes Logement 10",
+        "addressLocality": "Trélissac",
+        "postalCode": "24750",
+        "addressCountry": "FR"
+      },
+      "telephone": "+33648889652",
+      "email": "deinf@protonmail.com",
+      "priceRange": "25€-100€",
+      "areaServed": ["Trélissac", "Périgueux", "Coulounieix-Chamiers"]
+    }
+    </script>
 </head>
 <body>
     <a class="skip-link" href="#main">Passer au contenu</a>
     <nav class="navbar">
         <div class="logo"><a class="nav-title-logo" href="index.html">Dev&Info</a></div>
         <div class="nav-links">
-            <a href="index.html" >Accueil</a>
+            <a href="index.html">Accueil</a>
             <a href="prestations.html">Prestations</a>
             <a href="formations.html">Formations</a>
             <a href="boutique.html">Boutique</a>
@@ -26,10 +47,95 @@
 
     <main id="main">
         <section class="section">
-            <h1>Contactez-Nous</h1>
-        <p>Pour toute question ou demande concernant nos services, formations ou équipements reconditionnés, envoyez-nous un email :</p>
-        <a href="mailto:deinf@protonmail.com" class="contact-link">Envoyer un Email</a>
-    <p>Vous pouvez également nous joindre par téléphone au : <a class="contact" href="tel:+33648889652">06 48 88 96 52</a></p>
+            <div class="contact-intro">
+                <h1 class="title-page">Contactez-Nous</h1>
+                <p>Pour toute question ou demande concernant nos services, formations ou équipements reconditionnés, choisissez le moyen de contact qui vous convient le mieux.</p>
+            </div>
+
+            <!-- Méthodes de contact rapide -->
+            <div class="contact-methods">
+                <div class="contact-method">
+                    <div class="contact-method-icon" aria-hidden="true">📞</div>
+                    <h2>Par Téléphone</h2>
+                    <p>Pour une réponse immédiate</p>
+                    <a href="tel:+33648889652" class="contact-phone">06 48 88 96 52</a>
+                </div>
+
+                <div class="contact-method">
+                    <div class="contact-method-icon" aria-hidden="true">📧</div>
+                    <h2>Par Email</h2>
+                    <p>Réponse sous 24h</p>
+                    <a href="mailto:devandinfo@protonmail.com" class="contact-link">devandinfo@protonmail.com</a>
+                </div>
+            </div>
+
+            <!-- Formulaire de contact avec Formspree -->
+            <div class="contact-form-container">
+                <h2>Ou remplissez ce formulaire</h2>
+                
+                <!-- ⚠️ IMPORTANT: Remplace TON_FORMSPREE_ID par ton vrai ID Formspree -->
+                <form action="https://formspree.io/f/mjkaqdkl" method="POST">
+                    
+                    <div class="form-group">
+                        <label for="name">Nom complet <span class="form-required">*</span></label>
+                        <input type="text" id="name" name="name" required placeholder="Jean Dupont">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Adresse email <span class="form-required">*</span></label>
+                        <input type="email" id="email" name="_replyto" required placeholder="votre.email@exemple.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Téléphone</label>
+                        <input type="tel" id="phone" name="phone" placeholder="06 12 34 56 78">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Type de demande <span class="form-required">*</span></label>
+                        <select id="subject" name="subject" required>
+                            <option value="">-- Choisissez une option --</option>
+                            <option value="Dépannage / Assistance à domicile">Dépannage / Assistance à domicile</option>
+                            <option value="Demande de formation">Demande de formation</option>
+                            <option value="Matériel reconditionné">Matériel reconditionné</option>
+                            <option value="Demande de devis">Demande de devis</option>
+                            <option value="Autre question">Autre question</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Votre message <span class="form-required">*</span></label>
+                        <textarea id="message" name="message" required placeholder="Décrivez votre besoin ou votre problème..."></textarea>
+                    </div>
+
+                    <!-- Champ honeypot anti-spam (invisible pour les humains, piège pour les bots) -->
+                    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+                    
+                    <!-- Redirection après soumission - CHANGE L'URL PAR TON VRAI SITE -->
+                    <input type="hidden" name="_next" value="https://paewi.github.io/DEV-INFO-SITE/merci.html">
+                    
+                    <!-- Personnalisation de l'objet de l'email que tu recevras -->
+                    <input type="hidden" name="_subject" value="Nouveau message depuis le site Dev&Info">
+
+                    <button type="submit" class="form-submit">Envoyer le message</button>
+                    
+                    <p style="margin-top: 1rem; font-size: 0.9rem; text-align: center; color: #e0e1dd;">
+                        <span class="form-required">*</span> Champs obligatoires
+                    </p>
+                </form>
+
+                <div style="margin-top: 2rem; padding: 1rem; background: rgba(0, 255, 159, 0.05); border-radius: 8px; border: 1px solid rgba(0, 255, 159, 0.1); text-align: center;">
+                    <p style="margin: 0; font-size: 0.9rem; color: #e0e1dd;">
+                        🔒 Vos données sont protégées et ne seront utilisées que pour vous répondre.
+                    </p>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem; text-align: center; padding: 2rem; background: rgba(27, 38, 59, 0.5); border-radius: 10px;">
+                <h3 style="color: #00ff9f; margin-bottom: 1rem;">Zone d'intervention</h3>
+                <p>Nous intervenons principalement sur Trélissac, Périgueux, Coulounieix-Chamiers et communes environnantes.</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem;">Des frais de déplacement peuvent s'appliquer au-delà de 5 km - voir nos <a href="prestations.html" style="color: #00ff9f; text-decoration: underline;">tarifs</a>.</p>
+            </div>
         </section>
     </main>
 
