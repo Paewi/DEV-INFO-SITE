@@ -603,6 +603,233 @@ footer p {
 }
 
 /* ============================================
+   CONFIG PC DETAIL PAGES
+   ============================================ */
+.config-detail {
+    padding: 2rem 1rem;
+}
+
+.config-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: rgba(0, 255, 159, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 159, 0.2);
+}
+
+.config-header h2 {
+    color: #00ff9f;
+    margin-bottom: 1rem;
+}
+
+.config-total-price {
+    font-size: 1.8rem;
+    color: #ff006e;
+    font-weight: 700;
+    margin: 1rem 0;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.config-total-price span {
+    color: #00ff9f;
+}
+
+/* Components List */
+.components-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.component {
+    background: rgba(27, 38, 59, 0.8);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 159, 0.2);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.component:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px rgba(0, 255, 159, 0.4);
+    border-color: rgba(0, 255, 159, 0.4);
+}
+
+.component-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.component-icon {
+    font-size: 2rem;
+}
+
+.component-header h3 {
+    color: #00ff9f;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.component-name {
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.component-price {
+    font-size: 1.6rem;
+    color: #ff006e;
+    font-weight: 700;
+    margin: 0.5rem 0;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.component-desc {
+    color: #b8c5d6;
+    font-size: 0.9rem;
+    margin-top: auto;
+    line-height: 1.5;
+}
+
+/* Screen Section */
+.screen-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.screen-card {
+    background: rgba(27, 38, 59, 0.8);
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid rgba(0, 255, 159, 0.2);
+    transition: all 0.3s ease;
+}
+
+.screen-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px rgba(0, 255, 159, 0.4);
+    border-color: rgba(0, 255, 159, 0.4);
+}
+
+.screen-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.screen-card h3 {
+    color: #00ff9f;
+    margin-bottom: 0.5rem;
+}
+
+.screen-price {
+    color: #ff006e;
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin: 0.5rem 0;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.screen-card p {
+    color: #b8c5d6;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Benchmarks Section */
+.benchmarks-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.benchmark-card {
+    background: rgba(27, 38, 59, 0.8);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 159, 0.2);
+    transition: all 0.3s ease;
+}
+
+.benchmark-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px rgba(0, 255, 159, 0.4);
+    border-color: rgba(0, 255, 159, 0.4);
+}
+
+.benchmark-card h3 {
+    color: #00ff9f;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.benchmark-card p {
+    color: #b8c5d6;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.benchmark-card strong {
+    color: #ffffff;
+}
+
+.benchmark-card ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+    list-style: none;
+}
+
+.benchmark-card li {
+    color: #b8c5d6;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+/* Config CTA Section */
+.config-cta {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(0, 255, 159, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 159, 0.2);
+    margin-top: 3rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.config-cta h2 {
+    color: #00ff9f;
+    margin-bottom: 1rem;
+}
+
+.config-cta p {
+    color: #b8c5d6;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+/* ============================================
    RESPONSIVE MOBILE
    ============================================ */
 @media (max-width: 768px) {
