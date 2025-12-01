@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Multi-Configs — Dev&Info</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Orbitron', monospace; 
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: #fff; 
+            min-height: 100vh; 
+            padding: 20px;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 40px; }
+        .header h1 { font-size: 3em; background: linear-gradient(45deg, #00d4ff, #ff6b6b); color: transparent; background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* onglets configs */
+        .tabs { 
+            display: flex; 
+            background: rgba(255,255,255,0.05); 
+            border-radius: 15px; 
+            padding: 5px; 
+            margin-bottom: 30px; 
+            overflow-x: auto;
+        }
+        .tab-btn { 
+            flex: 1; 
+            padding: 15px 20px; 
+            background: transparent; 
+            border: none; 
+            color: #b0b0b0; 
+            cursor: pointer; 
+            border-radius: 10px; 
+            font-weight: 700; 
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            min-width: 150px;
+        }
+        .tab-btn.active { 
+            background: linear-gradient(45deg, #00d4ff, #0099cc); 
+            color: white; 
+            transform: translateY(-2px);
+        }
+        
+        .components-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
+        .component-card { 
+            background: rgba(255,255,255,0.05); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            border-radius: 15px; 
+            padding: 25px; 
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .component-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,212,255,0.1); }
+        .component-title { font-size: 1.3em; color: #00d4ff; margin-bottom: 15px; font-weight: 700; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: #b0b0b0; font-weight: 500; }
+        input { 
+            width: 100%; padding: 12px 15px; 
+            background: rgba(255,255,255,0.08); 
+            border: 2px solid rgba(255,255,255,0.1); 
+            border-radius: 10px; 
+            color: #fff; 
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+        input:focus { outline: none; border-color: #00d4ff; box-shadow: 0 0 20px rgba(0,212,255,0.3); }
+        .btn { 
+            background: linear-gradient(45deg, #00d4ff, #0099cc); 
+            color: white; 
+            border: none; 
+            padding: 12px 30px; 
+            border-radius: 25px; 
+            cursor: pointer; 
+            font-weight: 700; 
+            font-size: 1em;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,212,255,0.3); }
+        .btn-success { background: linear-gradient(45deg, #4CAF50, #45a049); }
+        .btn-danger { background: linear-gradient(45deg, #f44336, #da190b); }
+        .btn-warning { background: linear-gradient(45deg, #ff9800, #e68900); }
+        .btn-save-config { background: linear-gradient(45deg, #4CAF50, #45a049); width: 100%; margin-top: 15px; }
+        
+        .total-display { 
+            background: linear-gradient(45deg, #4CAF50, #45a049); 
+            padding: 25px; 
+            border-radius: 15px; 
+            text-align: center; 
+            margin: 30px 0;
+            font-size: 2em; 
+            font-weight: 700;
+        }
+        
+        .password-container, .hidden { display: none !important; }
+        .password-container.active { display: flex !important; }
+        .password-box { 
+            position: fixed; top: 50%; left: 50%; 
+            transform: translate(-50%, -50%); 
+            background: rgba(255,255,255,0.1); 
+            padding: 40px; 
+            border-radius: 15px; 
+            text-align: center; 
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            z-index: 1000;
+        }
+        .link-home { position: fixed; top: 20px; right: 20px; z-index: 999; }
+        .link-home a { color: #00d4ff; text-decoration: none; font-weight: 700; }
+        
+        .config-content { display: none; }
+        .config-content.active { display: block; }
+        
+        /* Modal changement mot de passe */
+        .modal-overlay { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0, 0, 0, 0.7); 
+            z-index: 2000; 
+            align-items: center; 
+            justify-content: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-box { 
+            background: rgba(20, 20, 40, 0.95); 
+            padding: 40px; 
+            border-radius: 15px; 
+            border: 2px solid rgba(0, 212, 255, 0.3); 
+            max-width: 450px; 
+            width: 90%;
+            backdrop-filter: blur(20px);
+        }
+        .modal-box h2 { 
+            color: #00d4ff; 
+            margin-bottom: 20px; 
+            font-size: 1.8em;
+        }
+        .modal-box p { 
+            color: #b0b0b0; 
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+        .modal-input { 
+            width: 100%; 
+            padding: 12px 15px; 
+            margin-bottom: 15px; 
+            background: rgba(255, 255, 255, 0.08); 
+            border: 2px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 10px; 
+            color: #fff; 
+            font-size: 1em;
+        }
+        .modal-input:focus { 
+            outline: none; 
+            border-color: #00d4ff; 
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+        .modal-buttons { 
+            display: flex; 
+            gap: 10px; 
+            margin-top: 25px;
+        }
+        .modal-buttons button { 
+            flex: 1; 
+            padding: 12px; 
+            border: none; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            font-weight: 700;
+        }
+        .modal-btn-confirm { 
+            background: linear-gradient(45deg, #4CAF50, #45a049); 
+            color: white;
+        }
+        .modal-btn-cancel { 
+            background: linear-gradient(45deg, #666, #555); 
+            color: white;
+        }
+        .modal-btn-confirm:hover { opacity: 0.9; }
+        .modal-btn-cancel:hover { opacity: 0.9; }
+        
+        .admin-settings { 
+            text-align: center; 
+            margin-bottom: 20px; 
+            padding-bottom: 20px; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .btn-change-password { 
+            background: linear-gradient(45deg, #ff9800, #e68900); 
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- ÉCRAN MOT DE PASSE -->
+    <div class="password-container active" id="passwordScreen">
+        <div class="password-box">
+            <h2>🔐 Accès Admin Multi-Configs</h2>
+            <p>Mot de passe requis</p>
+            <input type="password" id="adminPassword" placeholder="Entrez le mot de passe..." autofocus>
+            <br><br>
+            <button class="btn" onclick="checkPassword()">🚀 Accéder à l'Admin</button>
+        </div>
+    </div>
+
+    <!-- MODAL CHANGEMENT MOT DE PASSE -->
+    <div class="modal-overlay" id="changePasswordModal">
+        <div class="modal-box">
+            <h2>🔑 Changer le Mot de Passe</h2>
+            <div id="changePasswordStep1" style="display: block;">
+                <p>Étape 1 : Saisis ton email pour recevoir un code de validation</p>
+                <input type="email" class="modal-input" id="emailForReset" placeholder="ton@email.com" autofocus>
+                <div class="modal-buttons">
+                    <button class="modal-btn-confirm" onclick="sendValidationCode()">📧 Envoyer Code</button>
+                    <button class="modal-btn-cancel" onclick="closeChangePasswordModal()">Annuler</button>
+                </div>
+            </div>
+            
+            <div id="changePasswordStep2" style="display: none;">
+                <p>Étape 2 : Saisis le code reçu par email</p>
+                <input type="text" class="modal-input" id="validationCode" placeholder="Code à 6 chiffres" maxlength="6">
+                <p>Étape 3 : Saisis ton nouveau mot de passe</p>
+                <input type="password" class="modal-input" id="newPassword" placeholder="Nouveau mot de passe">
+                <input type="password" class="modal-input" id="confirmPassword" placeholder="Confirme le mot de passe">
+                <div class="modal-buttons">
+                    <button class="modal-btn-confirm" onclick="verifyAndChangePassword()">✅ Valider</button>
+                    <button class="modal-btn-cancel" onclick="closeChangePasswordModal()">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- INTERFACE ADMIN -->
+    <a href="config-pc.html" class="link-home">🏠 Retour Config PC</a>
+
+    <div class="container hidden" id="adminPanel">
+        <div class="header">
+            <h1>⚙️ Admin Multi-Configurations</h1>
+        </div>
+
+        <!-- ONGLETS CONFIGURATIONS -->
+        <div class="tabs" id="tabs">
+            <!-- Généré par JS -->
+        </div>
+
+        <!-- CONTENU DES CONFIGS -->
+        <div id="configsContainer">
+            <!-- Généré par JS -->
+        </div>
+
+        <!-- BOUTONS GLOBAUX -->
+        <div style="text-align: center; margin-top: 40px;">
+            <div class="admin-settings">
+                <button class="btn btn-change-password" onclick="openChangePasswordModal()">🔑 CHANGER MOT DE PASSE</button>
+            </div>
+            <button class="btn btn-success" onclick="saveAllConfigs()">💾 SAUVEGARDER TOUTES LES CONFIGS</button>
+            <button class="btn btn-warning" onclick="resetAllConfigs()">🔄 RESET TOUT PAR DÉFAUT</button>
+            <button class="btn btn-danger" onclick="clearAllConfigs()">🗑️ EFFACER TOUTES LES SAUVEGARDES</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js"></script>
+    <script>
+        // === CONFIGURATION SIMPLE SANS EMAILJS ===
+        // Le code de validation s'affiche directement sur l'écran
+        // Tu peux le noter et le transmettre à l'utilisateur
+
+        // === VARIABLES GLOBALES ===
+        let validationCodeSent = null;
+        let userEmailForReset = null;
+        // Hash SHA-256 du mot de passe 'admin'
+        // Stocké dans localStorage pour permettre les changements dynamiques
+        let PASSWORD_HASH = localStorage.getItem('adminPasswordHash') || '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
+
+        // Fonction pour générer un hash SHA-256
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
+
+        // Fonction pour générer le hash d'un nouveau mot de passe (à utiliser en console)
+        async function generatePasswordHash(password) {
+            const hash = await hashPassword(password);
+            console.log(`Hash du mot de passe "${password}": ${hash}`);
+            console.log('Copie cette valeur dans const PASSWORD_HASH = "..."');
+            return hash;
+        }
+
+        // 8 CONFIGURATIONS + leurs données par défaut
+        const CONFIGS = {
+            'config850': { title: 'Config 850€', components: [
+                { id: 1, name: 'Ryzen 5 8400F', price: 120, url: 'https://amzn.to/48g8XNG' },
+                { id: 2, name: 'RTX 5060', price: 290, url: 'https://amzn.to/4pbl1Y0' },
+                { id: 3, name: 'B650M D3HP', price: 100, url: 'https://amzn.to/4paCv6U' },
+                { id: 4, name: 'TR Assassin King120', price: 20, url: 'https://amzn.to/3M0MlcT' },
+                { id: 5, name: '1x16Go 6000 C30', price: 150, url: 'https://amzn.to/43XEXF8' },
+                { id: 6, name: 'Acer GM7 1To', price: 80, url: 'https://amzn.to/48GssQV' },
+                { id: 7, name: 'MSI MAG F 100M', price: 50, url: 'https://amzn.to/4irl3Z3' },
+                { id: 8, name: 'MSI A650BN', price: 55, url: 'https://amzn.to/4ruZ8nV' }
+            ]},
+            'config1000': { title: 'Config 1000€', components: [
+                { id: 1, name: 'Ryzen 7 7700X', price: 300, url: '' },
+                { id: 2, name: 'RTX 4070', price: 550, url: '' },
+                { id: 3, name: 'Composant 3', price: 0, url: '' },
+                { id: 4, name: 'Composant 4', price: 0, url: '' },
+                { id: 5, name: 'Composant 5', price: 0, url: '' },
+                { id: 6, name: 'Composant 6', price: 0, url: '' },
+                { id: 7, name: 'Composant 7', price: 0, url: '' },
+                { id: 8, name: 'Composant 8', price: 0, url: '' }
+            ]},
+            'config1350': { title: 'Config 1350€', components: [] },
+            'config1550': { title: 'Config 1550€', components: [] },
+            'config1800': { title: 'Config 1800€', components: [] },
+            'config1900': { title: 'Config 1900€', components: [] },
+            'config2000': { title: 'Config 2000€', components: [] },
+            'config2200': { title: 'Config 2200€', components: [] }
+        };
+
+        let currentConfig = 'config850';
+        let allConfigs = { ...CONFIGS };
+
+        // Vérification mot de passe avec hash
+        async function checkPassword() {
+            const password = document.getElementById('adminPassword').value;
+            const hash = await hashPassword(password);
+            
+            if (hash === PASSWORD_HASH) {
+                document.getElementById('passwordScreen').classList.remove('active');
+                document.getElementById('adminPanel').classList.remove('hidden');
+                loadAllConfigs();
+                renderTabs();
+                showConfig('config850');
+            } else {
+                alert('❌ Mot de passe incorrect !');
+                document.getElementById('adminPassword').value = '';
+            }
+        }
+
+        // Charger toutes les configs
+        function loadAllConfigs() {
+            Object.keys(CONFIGS).forEach(configKey => {
+                const saved = localStorage.getItem(`configPC_${configKey}`);
+                if (saved) {
+                    let comps = JSON.parse(saved);
+                    // Correction des id NaN ou doublons
+                    let nextId = 1;
+                    comps = comps.map((c, idx) => {
+                        // Si id non valide ou doublon, réattribue
+                        if (typeof c.id !== 'number' || isNaN(c.id)) {
+                            c.id = nextId++;
+                        } else {
+                            c.id = nextId++;
+                        }
+                        return c;
+                    });
+                    allConfigs[configKey].components = comps;
+                }
+            });
+        }
+
+        // Rendu des onglets
+        function renderTabs() {
+            const tabs = document.getElementById('tabs');
+            tabs.innerHTML = '';
+            Object.keys(allConfigs).forEach(configKey => {
+                const btn = document.createElement('button');
+                btn.className = `tab-btn ${currentConfig === configKey ? 'active' : ''}`;
+                btn.innerHTML = `⚙️ ${allConfigs[configKey].title}`;
+                btn.onclick = () => showConfig(configKey);
+                tabs.appendChild(btn);
+            });
+        }
+
+        // Afficher une config
+        function showConfig(configKey) {
+            currentConfig = configKey;
+            renderTabs();
+            renderComponents();
+            updateTotal();
+        }
+
+        // Rendu composants
+        function renderComponents() {
+            const container = document.getElementById('configsContainer');
+            const config = allConfigs[currentConfig];
+            
+            let html = `
+                <div class="config-content active">
+                    <div class="total-display">
+                        💰 <strong>${config.title}</strong><br>
+                        Total: <span id="totalAdmin">0€</span>
+                    </div>
+                    <div class="components-grid" id="componentsGrid">
+            `;
+
+            const titles = ['🖥️ Processeur', '🎮 Carte graphique', '🔧 Carte mère', '❄️ Refroidissement', 
+                           '💾 RAM', '🗄️ SSD', '📦 Boîtier', '🔌 Alim'];
+
+            config.components.forEach((comp, index) => {
+                html += `
+                    <div class="component-card">
+                        <div class="component-title">${titles[index] || '⚙️ Composant'}</div>
+                        <div class="form-group">
+                            <label>Nom</label>
+                            <input type="text" value="${comp.name}" onchange="updateComponent('${currentConfig}', ${comp.id}, 'name', this.value)">
+                        </div>
+                        <div class="form-group">
+                            <label>Prix (€)</label>
+                            <input type="number" step="0.01" value="${comp.price}" onchange="updateComponent('${currentConfig}', ${comp.id}, 'price', parseFloat(this.value))">
+                        </div>
+                        <div class="form-group">
+                            <label>Lien Amazon</label>
+                            <input type="url" value="${comp.url}" onchange="updateComponent('${currentConfig}', ${comp.id}, 'url', this.value)">
+                        </div>
+                        <button class="btn btn-danger" onclick="deleteComponent('${currentConfig}', ${comp.id})" style="width: 100%; margin-top: 10px;">🗑️ Supprimer</button>
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="btn btn-save-config" onclick="saveConfig('${currentConfig}')">💾 SAUVEGARDER CETTE CONFIG</button>
+                        <button class="btn btn-warning" onclick="addComponent('${currentConfig}')" style="margin-left: 10px;">➕ AJOUTER COMPOSANT</button>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        // Mettre à jour composant
+        function updateComponent(configKey, id, field, value) {
+            const config = allConfigs[configKey];
+            const comp = config.components.find(c => c.id === id);
+            if (comp) comp[field] = value;
+            if (configKey === currentConfig) updateTotal();
+        }
+
+        // Supprimer composant
+        function deleteComponent(configKey, id) {
+            if (confirm('Supprimer ce composant ?')) {
+                allConfigs[configKey].components = allConfigs[configKey].components.filter(c => c.id !== id);
+                if (configKey === currentConfig) renderComponents();
+            }
+        }
+
+        // Ajouter composant
+        function addComponent(configKey) {
+            const comps = allConfigs[configKey].components;
+            let newId = 1;
+            if (comps.length > 0) {
+                // Cherche le plus grand id existant
+                newId = Math.max(...comps.map(c => typeof c.id === 'number' ? c.id : 0)) + 1;
+            }
+            comps.push({
+                id: newId,
+                name: 'Nouveau composant',
+                price: 0,
+                url: ''
+            });
+            if (configKey === currentConfig) renderComponents();
+        }
+
+        // Total
+        function updateTotal() {
+            const config = allConfigs[currentConfig];
+            const total = config.components.reduce((sum, comp) => sum + comp.price, 0);
+            document.getElementById('totalAdmin').textContent = total.toFixed(2) + '€';
+        }
+
+        // Sauvegarder 1 config
+        function saveConfig(configKey) {
+            localStorage.setItem(`configPC_${configKey}`, JSON.stringify(allConfigs[configKey].components));
+            alert(`✅ ${allConfigs[configKey].title} sauvegardée !`);
+        }
+
+        // Sauvegarder TOUT
+        function saveAllConfigs() {
+            Object.keys(allConfigs).forEach(configKey => {
+                localStorage.setItem(`configPC_${configKey}`, JSON.stringify(allConfigs[configKey].components));
+            });
+            alert('✅ TOUTES les configurations sauvegardées !');
+        }
+
+        // Reset tout
+        function resetAllConfigs() {
+            if (confirm('Remettre TOUTES les configs par défaut ?')) {
+                allConfigs = { ...CONFIGS };
+                loadAllConfigs();
+                renderTabs();
+                showConfig(currentConfig);
+            }
+        }
+
+        // Effacer tout
+        function clearAllConfigs() {
+            if (confirm('EFFACER TOUTES les sauvegardes ?')) {
+                Object.keys(CONFIGS).forEach(configKey => {
+                    localStorage.removeItem(`configPC_${configKey}`);
+                });
+                allConfigs = { ...CONFIGS };
+                renderTabs();
+                showConfig(currentConfig);
+                alert('🗑️ TOUT effacé !');
+            }
+        }
+
+        // Entrée mot de passe
+        document.getElementById('adminPassword').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') checkPassword();
+        });
+
+        // === GESTION CHANGEMENT MOT DE PASSE ===
+        
+        function openChangePasswordModal() {
+            document.getElementById('changePasswordModal').classList.add('active');
+            document.getElementById('changePasswordStep1').style.display = 'block';
+            document.getElementById('changePasswordStep2').style.display = 'none';
+            document.getElementById('emailForReset').value = '';
+            document.getElementById('validationCode').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        }
+
+        function closeChangePasswordModal() {
+            document.getElementById('changePasswordModal').classList.remove('active');
+        }
+
+        function generateValidationCode() {
+            return Math.floor(100000 + Math.random() * 900000).toString(); // 6 chiffres
+        }
+
+        async function sendValidationCode() {
+            const email = document.getElementById('emailForReset').value.trim();
+            
+            if (!email || !email.includes('@')) {
+                alert('❌ Entre une adresse email valide !');
+                return;
+            }
+
+            const code = generateValidationCode();
+            validationCodeSent = code;
+            userEmailForReset = email;
+
+            // Affiche le code de validation directement
+            const codeDisplay = `
+🔐 CODE DE VALIDATION GÉNÉRÉ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Code: ${code}
+Email: ${email}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 À faire :
+1. Note ce code (il expire dans cette session)
+2. Transmets-le à l'utilisateur
+3. Saisis-le ci-dessous pour confirmer
+
+⚠️ Ce code s'affiche ici pour des raisons de développement.
+Pour la production, configure EmailJS pour envoyer par email.
+            `;
+
+            alert(codeDisplay);
+            console.log(`✅ CODE VALIDATION: ${code} pour ${email}`);
+
+            // Passe à l'étape 2
+            document.getElementById('changePasswordStep1').style.display = 'none';
+            document.getElementById('changePasswordStep2').style.display = 'block';
+            document.getElementById('validationCode').focus();
+        }
+
+        async function verifyAndChangePassword() {
+            const code = document.getElementById('validationCode').value.trim();
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Vérifications
+            if (code !== validationCodeSent) {
+                alert('❌ Code de validation incorrect !');
+                return;
+            }
+
+            if (!newPassword || !confirmPassword) {
+                alert('❌ Remplis les deux champs de mot de passe !');
+                return;
+            }
+
+            if (newPassword !== confirmPassword) {
+                alert('❌ Les mots de passe ne correspondent pas !');
+                return;
+            }
+
+            if (newPassword.length < 6) {
+                alert('❌ Le mot de passe doit contenir au moins 6 caractères !');
+                return;
+            }
+
+            // Génère le nouveau hash
+            try {
+                const newHash = await hashPassword(newPassword);
+                
+                // Sauvegarde le nouveau hash dans localStorage
+                localStorage.setItem('adminPasswordHash', newHash);
+                PASSWORD_HASH = newHash;
+
+                alert(
+                    `✅ MOT DE PASSE CHANGÉ AVEC SUCCÈS !\n\n` +
+                    `Ton nouveau mot de passe est maintenant actif.\n` +
+                    `Tu peux fermer cette fenêtre et te reconnecter.`
+                );
+
+                console.log(`✅ NOUVEAU PASSWORD_HASH: ${newHash}`);
+                console.log('Le mot de passe a été sauvegardé dans localStorage');
+
+                closeChangePasswordModal();
+                
+                // Recharge la page après 2 secondes
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+
+            } catch (error) {
+                console.error('Erreur hachage:', error);
+                alert('❌ Erreur lors du hachage du mot de passe.');
+            }
+        }
+
+        // Fermer modal en cliquant en dehors
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('changePasswordModal');
+            if (e.target === modal) {
+                closeChangePasswordModal();
+            }
+        });
+    </script>
+</body>
+</html>
