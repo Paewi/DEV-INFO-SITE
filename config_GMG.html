@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Config GAMER Milieu de gamme — Dev&Info</title>
+    <meta name="description" content="Configuration PC GAMER Milieu de gamme optimisée.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a class="skip-link" href="#main">Passer au contenu</a>
+    <header class="navbar">
+        <div class="logo"><a class="nav-title-logo" href="index.html">Dev&Info</a></div>
+        <nav class="nav-links">
+            <a href="index.html">Accueil</a>
+            <a href="prestations.html">Prestations</a>
+            <a href="formations.html">Formations</a>
+            <a href="boutique.html">Boutique</a>
+            <a href="config-pc.html">Config PC</a>
+            <a href="fidelite.html">Fidélité</a>
+        </nav>
+    </header>
+
+    <main id="main">
+        <section class="hero">
+            <h1><span style="color: #ff006e;">GAMER</span><br>Milieu de gamme</h1>
+        </section>
+        <section class="section config-detail">
+            <div class="config-header">
+                <h2>Les Composants — <span id="total-composants">0€</span></h2>
+            </div>
+
+            <div class="components-list" id="componentsList">
+                <!-- Généré dynamiquement par JS -->
+            </div>
+
+            <p style="text-align: center;" class="affiliation-text">Dev&Info fait partie du Programme Partenaires d'Amazon EU, un programme d'affiliation conçu pour permettre de recevoir une rémunération en créant des liens vers Amazon.fr. Certains autres liens peuvent aussi être rémunérés.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Dev&Info. Tous droits réservés.<br>
+        <a class="contact" href="contact.html">Contact</a> - <a class="mentions-legales" href="mentions-legales.html">Mentions Légales</a></p>
+    </footer>
+
+    <script>
+        function loadAndRenderComponents() {
+            fetch('data_config_pc.json')
+                .then(response => response.json())
+                .then(data => {
+                    const components = document.getElementById('componentsList');
+                    data.config_GMG.forEach((comp, index) => {
+                        function createElement(tag, attributes = {}, ...children) {
+                            const element = document.createElement(tag);
+                            for (const key in attributes) {
+                                if (key === 'style') {
+                                    element.style.cssText = attributes[key];
+                                } else {
+                                    element.setAttribute(key, attributes[key]);
+                                }
+                            }
+                            children.forEach(child => {
+                                if (typeof child === 'string') {
+                                    element.appendChild(document.createTextNode(child));
+                                } else {
+                                    element.appendChild(child);
+                                }
+                            });
+                            return element;
+                        }
+                    
+                        const urlComponent = createElement('a', {
+                            href: data.config_GMG[index].url || '#',
+                            style: 'text-decoration: none;',
+                            target: '_blank'
+                        });
+                        const componentDiv = createElement('div', { class: 'component' });
+                        const headerDiv = createElement('div', { class: 'component-header' });
+                        const titleH3 = createElement('h3', {}, data.config_GMG[index].title || '⚙️');
+                        const nameP = createElement('p', { class: 'component-name' }, createElement('strong', {}, data.config_GMG[index].name));
+                        const priceP = createElement('p', { class: 'component-price tarif', 'data-tarif': data.config_GMG[index].price, contenteditable: 'false' }, `${data.config_GMG[index].price}€`);
+                        
+                        headerDiv.appendChild(titleH3);
+                        componentDiv.appendChild(headerDiv);
+                        componentDiv.appendChild(nameP);
+                        componentDiv.appendChild(priceP);
+                        urlComponent.appendChild(componentDiv);
+                        components.appendChild(urlComponent);
+                    });
+                    calculerTotal();
+                    attachTarifListeners();
+                })
+
+                function calculerTotal() {
+                    const tarifs = document.querySelectorAll('.tarif');
+                    let total = 0;
+                    tarifs.forEach(tarifElement => {
+                        const textePrix = tarifElement.textContent.trim().replace('€', '').replace(',', '.');
+                        const nouveauPrix = parseFloat(textePrix);
+                        if (!isNaN(nouveauPrix)) {
+                            tarifElement.setAttribute('data-tarif', nouveauPrix);
+                            total += nouveauPrix;
+                        }
+                    });
+                    document.getElementById('total-composants').textContent = total.toFixed(0) + '€';
+                }
+
+                function attachTarifListeners() {
+                    const tarifs = document.querySelectorAll('.tarif');
+                    tarifs.forEach(tarif => {
+                        tarif.addEventListener('input', calculerTotal);
+                        tarif.addEventListener('blur', calculerTotal);
+                    });
+                }
+                }
+                document.addEventListener('DOMContentLoaded', function() {
+                    loadAndRenderComponents();
+            });
+    </script>
+</body>
+</html>
