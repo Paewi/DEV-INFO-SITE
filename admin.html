@@ -262,9 +262,11 @@
             <div class="admin-settings">
                 <button class="btn btn-change-password" onclick="openChangePasswordModal()">🔑 CHANGER MOT DE PASSE</button>
             </div>
-            <button class="btn btn-success" onclick="saveAllConfigs()">💾 SAUVEGARDER TOUTES LES CONFIGS</button>
+            <button class="btn btn-success" onclick="saveAllConfigs()">💾 SAUVEGARDER TOUTES LES CONFIGS (localStorage)</button>
+            <button class="btn btn-success" style="background: linear-gradient(45deg,#0066cc,#004a99);" onclick="saveConfigsToGitHub()">💾 SAUVEGARDER SUR GITHUB</button>
             <button class="btn btn-warning" onclick="resetAllConfigs()">🔄 RESET TOUT PAR DÉFAUT</button>
             <button class="btn btn-danger" onclick="clearAllConfigs()">🗑️ EFFACER TOUTES LES SAUVEGARDES</button>
+            <p style="margin-top:10px; color:#cfcfcf; font-size:0.9em;">(La sauvegarde GitHub demande un token personnel GitHub avec le scope <code>repo</code> — ne le partage pas)</p>
         </div>
     </div>
 
@@ -523,6 +525,74 @@
         document.getElementById('adminPassword').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') checkPassword();
         });
+
+        // === SAUVEGARDE VERS GITHUB ===
+        // Utilisation : l'utilisateur fournit un token personnel GitHub (ne pas stocker)
+        async function saveConfigsToGitHub() {
+            if (!confirm('Voulez-vous sauvegarder toutes les configs sur GitHub (le dépôt sera modifié) ?')) return;
+
+            const token = prompt('Colle ton Personal Access Token GitHub (scope: repo). Ne le partage pas.');
+            if (!token) {
+                alert('Token requis pour pousser sur GitHub.');
+                return;
+            }
+
+            const owner = 'Paewi';
+            const repo = 'DEV-INFO-SITE';
+            const path = 'configs.json';
+
+            // Prépare le contenu JSON à sauvegarder
+            const payload = {};
+            Object.keys(allConfigs).forEach(k => {
+                payload[k] = {
+                    title: allConfigs[k].title,
+                    components: allConfigs[k].components
+                };
+            });
+
+            const contentStr = JSON.stringify(payload, null, 2);
+            const contentB64 = btoa(unescape(encodeURIComponent(contentStr)));
+
+            try {
+                // Check if file exists to get sha
+                const getUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+                let sha = null;
+                const getResp = await fetch(getUrl, {
+                    headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github+json' }
+                });
+                if (getResp.ok) {
+                    const getData = await getResp.json();
+                    sha = getData.sha;
+                }
+
+                // Commit via PUT
+                const putUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+                const body = {
+                    message: `Update configs.json via admin UI`,
+                    content: contentB64,
+                    branch: 'main'
+                };
+                if (sha) body.sha = sha;
+
+                const putResp = await fetch(putUrl, {
+                    method: 'PUT',
+                    headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+
+                if (!putResp.ok) {
+                    const err = await putResp.json();
+                    console.error('GitHub API error', err);
+                    alert('Erreur lors de la sauvegarde sur GitHub. Voir console pour détails.');
+                    return;
+                }
+
+                alert('✅ configs.json sauvegardé sur GitHub avec succès !');
+            } catch (e) {
+                console.error('Erreur sauvegarde GitHub:', e);
+                alert('Erreur lors de la sauvegarde sur GitHub. Voir console pour plus d\'infos.');
+            }
+        }
 
         // === GESTION CHANGEMENT MOT DE PASSE ===
         
