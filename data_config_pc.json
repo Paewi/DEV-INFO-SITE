@@ -19,7 +19,7 @@
                         "url": "https://amzn.to/4q6tdcv",
                         "title": "🔧 Carte mère",
                         "name": "MSI MAG A520M VECTOR WIFI",
-                        "price": 126
+                        "price": 116
                     },
                     {
                         "id": 4,
@@ -33,28 +33,28 @@
                         "url": "https://amzn.to/4qDLs9p",
                         "title": "💾 RAM",
                         "name": "2 x 8 Go DDR4 3200MHz",
-                        "price": 145
+                        "price": 146
                     },
                     {
                         "id": 6,
                         "url": "https://amzn.to/4qC88ql",
                         "title": "🗄️ SSD",
                         "name": "WD_BLACK SN7100 500 Go",
-                        "price": 157
+                        "price": 177
                     },
                     {
                         "id": 7,
                         "url": "https://amzn.to/44Lb37l",
                         "title": "📦 Boîtier",
                         "name": "MSI MAG Forge 120A",
-                        "price": 60
+                        "price": 58
                     },
                     {
                         "id": 8,
                         "url": "https://amzn.to/48toPNb",
                         "title": "🔌 Alimentation",
                         "name": "M.Red DU-550B",
-                        "price": 60
+                        "price": 52
                     }
     ],
      "config_GMG" : [
@@ -70,14 +70,14 @@
                         "url": "https://amzn.to/4qUqFhw",
                         "title": "🎮 Carte graphique",
                         "name": "RTX 5070 Ti 16G",
-                        "price": 1170
+                        "price": 1217
                     },
                     {
                         "id": 3,
                         "url": "https://amzn.to/4iBRDrp",
                         "title": "🔧 Carte mère",
                         "name": "ASUS Prime X870-P WiFi",
-                        "price": 245
+                        "price": 270
                     },
                     {
                         "id": 4,
@@ -88,24 +88,24 @@
                     },
                     {
                         "id": 5,
-                        "url": "https://amzn.to/45EFM6u",
+                        "url": "https://amzn.to/4a689vP",
                         "title": "💾 RAM",
                         "name": "2x16GB 6000MHz",
-                        "price": 233
+                        "price": 438
                     },
                     {
                         "id": 6,
                         "url": "https://amzn.to/4sdPuqr",
                         "title": "🗄️ SSD",
                         "name": "Crucial P510 SSD 2To",
-                        "price": 243
+                        "price": 250
                     },
                     {
                         "id": 7,
                         "url": "https://amzn.to/44fvQ2R",
                         "title": "📦 Boîtier",
                         "name": "M RED Crystal Sea Noir RGB",
-                        "price": 134
+                        "price": 143
                     },
                     {
                         "id": 8,
@@ -121,63 +121,63 @@
                         "url": "https://amzn.to/4ot1fG8",
                         "title": "🖥️ Processeur",
                         "name": "Ryzen 7 9800X3D",
-                        "price": 464
+                        "price": 455
                     },
                     {
                         "id": 2,
-                        "url": "https://amzn.to/4pfb2QA",
+                        "url": "https://amzn.to/3ZhQc8H",
                         "title": "🎮 Carte graphique",
                         "name": "RTX 5080 16G",
-                        "price": 1238
+                        "price": 1411
                     },
                     {
                         "id": 3,
-                        "url": "https://amzn.to/4q3XZ5x",
+                        "url": "https://amzn.to/4tavk0V",
                         "title": "🔧 Carte mère",
                         "name": "GIGABYTE X870 Eagle WIFI7",
-                        "price": 439
+                        "price": 275
                     },
                     {
                         "id": 4,
                         "url": "https://amzn.to/4rzwzWC",
                         "title": "❄️ Refroidissement",
                         "name": "ASUS ROG RYUJIN 360",
-                        "price": 188
+                        "price": 189
                     },
                     {
                         "id": 5,
-                        "url": "https://amzn.to/45EFM6u",
+                        "url": "https://amzn.to/4a689vP",
                         "title": "💾 RAM",
                         "name": "2x16GB 6000MHz",
-                        "price": 233
+                        "price": 438
                     },
                     {
                         "id": 6,
                         "url": "https://amzn.to/3L1PlFB",
                         "title": "🗄️ SSD",
                         "name": "Crucial P510 SSD 2To",
-                        "price": 243
+                        "price": 250
                     },
                     {
                         "id": 7,
                         "url": "https://amzn.to/4rD28Pq",
                         "title": "📦 Boîtier",
                         "name": "HYTE Y60 RD ATX",
-                        "price": 198
+                        "price": 220
                     },
                     {
                         "id": 8,
                         "url": "https://amzn.to/4oG7Ux2",
                         "title": "🔌 Alimentation",
                         "name": "MSI MPG A1000G",
-                        "price": 140
+                        "price": 136
                     },
                     {
                         "id": 9,
                         "url": "https://amzn.to/4popTJl",
                         "title": "❄️ Ventilateurs supplémentaires",
                         "name": "CORSAIR iCUE LINK RX120",
-                        "price": 75
+                        "price": 80
                     }
     ],
      "config_BBG" : [
@@ -186,7 +186,7 @@
                         "url": "https://amzn.to/4oAjvNX",
                         "title": "🖥️ Processeur",
                         "name": "INTEL CORE I7-14700KF",
-                        "price": 371
+                        "price": 370
                     },
                     {
                         "id": 2,
@@ -207,28 +207,28 @@
                         "url": "https://amzn.to/4apQEbC",
                         "title": "❄️ Refroidissement",
                         "name": "be quiet! Pure Rock Pro 3 Black",
-                        "price": 51
+                        "price": 54
                     },
                     {
                         "id": 5,
                         "url": "https://amzn.to/4qDLs9p",
                         "title": "💾 RAM",
                         "name": "2x8Go DDR4 3200MHz",
-                        "price": 145
+                        "price": 146
                     },
                     {
                         "id": 6,
                         "url": "https://amzn.to/4qC88ql",
                         "title": "🗄️ SSD",
                         "name": "WD_BLACK SN7100 500 Go",
-                        "price": 157
+                        "price": 177
                     },
                     {
                         "id": 7,
                         "url": "https://amzn.to/4itEWPg",
                         "title": "📦 Boîtier",
                         "name": "ITEK PRIME DARK + ALIM 500W",
-                        "price": 61
+                        "price": 60
                     },
                     {
                         "id": 8,
@@ -251,14 +251,15 @@
                         "url": "https://amzn.to/4jjMjZV",
                         "title": "🎮 Carte graphique",
                         "name": "RTX 5060 8G",
-                        "price": 330
+                        "price": 360
                     },
                     {
                         "id": 3,
                         "url": "https://amzn.to/4aVzP91",
                         "title": "🔧 Carte mère",
                         "name": "Asus PRIME H610M-A",
-                        "price": 97                    },
+                        "price": 99                    
+                    },
                     {
                         "id": 4,
                         "url": "https://amzn.to/4b2AwNG",
@@ -271,28 +272,28 @@
                         "url": "https://amzn.to/4qDLs9p",
                         "title": "💾 RAM",
                         "name": "2x16Go DDR4 3200MHz",
-                        "price": 145
+                        "price": 146
                     },
                     {
                         "id": 6,
                         "url": "https://amzn.to/3K9QavL",
                         "title": "🗄️ SSD",
                         "name": "Crucial T500 1To",
-                        "price": 132
+                        "price": 155
                     },
                     {
                         "id": 7,
                         "url": "https://amzn.to/4ap26nO",
                         "title": "📦 Boîtier",
                         "name": "be quiet! Silent Base 802",
-                        "price": 171
+                        "price": 166
                     },
                     {
                         "id": 8,
                         "url": "https://amzn.to/3XtWaTa",
                         "title": "🔌 Alimentation",
                         "name": "MSI MAG A750GL",
-                        "price": 93
+                        "price": 90
                     }
     ],
      "config_BHG" : [
@@ -301,56 +302,56 @@
                         "url": "https://amzn.to/4owSXgB",
                         "title": "🖥️ Processeur",
                         "name": "Ryzen 7 9800X3D",
-                        "price": 464
+                        "price": 455
                     },
                     {
                         "id": 2,
                         "url": "https://amzn.to/3YIF44u",
                         "title": "🎮 Carte graphique",
                         "name": "RTX 5080 16GB",
-                        "price": 1635
+                        "price": 1550
                     },
                     {
                         "id": 3,
                         "url": "https://amzn.to/44fOSpH",
                         "title": "🔧 Carte mère",
                         "name": "MSI X870 GAMING PLUS WIFI",
-                        "price": 225
+                        "price": 293
                     },
                     {
                         "id": 4,
                         "url": "https://amzn.to/3Kx9Vxc",
                         "title": "❄️ Refroidissement",
                         "name": "be quiet! Pure Rock Pro 3 Black",
-                        "price": 51
+                        "price": 54
                     },
                     {
                         "id": 5,
-                        "url": "https://amzn.to/45EFM6u",
+                        "url": "https://amzn.to/4a689vP",
                         "title": "💾 RAM",
                         "name": "2x16Go DDR5 6000MHz",
-                        "price": 233
+                        "price": 438
                     },
                     {
                         "id": 6,
                         "url": "https://amzn.to/3K9QavL",
                         "title": "🗄️ SSD",
                         "name": "WD_BLACK T500 1 To",
-                        "price": 132
+                        "price": 155
                     },
                     {
                         "id": 7,
                         "url": "https://amzn.to/4pKFMcV",
                         "title": "📦 Boîtier",
                         "name": "be quiet! PURE BASE 501",
-                        "price": 91
+                        "price": 92
                     },
                     {
                         "id": 8,
                         "url": "https://amzn.to/4ryRvwW",
                         "title": "🔌 Alimentation",
                         "name": "MONTECH Century II",
-                        "price": 143
+                        "price": 144
                     }
     ]
 }
