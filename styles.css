@@ -333,6 +333,11 @@ main {
     font-family: 'Orbitron', sans-serif;
 }
 
+.service-price-list {
+    font-size: 1.3rem;
+    line-height: 3rem
+}
+
 .service-details {
     font-size: 0.9rem;
     color: #e0e1dd;
